@@ -14,7 +14,7 @@ class WishListController extends Controller
 
             $user_id=Auth::guard('customerlogin')->id();
             WishList::where('user_id',$user_id)->where('product_id',$product_id)->delete();
-            
+
             return back()->with('wishAdd','Wish Delete to cart');
         }else{
 
@@ -26,5 +26,11 @@ class WishListController extends Controller
             return back()->with('wishAdd','Wish add to cart');
         }
 
+    }
+    function wishDelete($product_id){
+        $user_id=Auth::guard('customerlogin')->id();
+        WishList::where('user_id',$user_id)->where('product_id',$product_id)->delete();
+
+        return back()->with('wishAdd','Wish Delete to cart');
     }
 }

@@ -171,13 +171,20 @@
                                                 <span class="new">New</span>
                                             </span>
                                             <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="pe-7s-like"></i></a>
+                                                @if (App\Models\WishList::where('user_id',Auth::guard('customerlogin')->id())->where('product_id',$product->id)->exists())
+
+                                                <a class="wis_select2" href="{{ route('wishInsert',$product->id) }}" class="action wishlist" title="Wishlist"><i
+                                                    class="pe-7s-like"></i></a>
+                                                @else
+                                                <a href="{{ route('wishInsert',$product->id) }}" class="action wishlist" title="Wishlist"><i
+                                                    class="pe-7s-like"></i></a>
+                                                @endif
+
                                                 <a href="#" class="action quickview " data-link-action="quickview"
                                                     title="Quick view" data-bs-toggle="modal"
                                                     data-bs-target="#all_product_{{ $product->id }}" ><i class="pe-7s-search"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="pe-7s-refresh-2"></i></a>
+                                                {{-- <a href="compare.html" class="action compare" title="Compare"><i
+                                                        class="pe-7s-refresh-2"></i></a> --}}
                                             </div>
                                             <button title="Add To Cart" class=" add-to-cart">Add
                                                 To Cart</button>
@@ -213,7 +220,9 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-body">
+
                                                 <div class="row">
+
                                                     <div class="col-lg-6 col-sm-12 col-xs-12 mb-lm-30px mb-md-30px mb-sm-30px">
                                                         <!-- Swiper -->
                                                         <div class="swiper-container ">
@@ -267,19 +276,19 @@
                                                             </div>
                                                             <p class="mt-30px mb-0">{{ $product->description }} </p>
                                                             <div class="pro-details-quality">
-                                                                <div class="cart-plus-minus">
+                                                                {{-- <div class="cart-plus-minus">
                                                                     <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
-                                                                </div>
+                                                                </div> --}}
                                                                 <div class="pro-details-cart">
-                                                                    <button class="add-cart" href="#"> Add To
-                                                                        Cart</button>
+                                                                    <a class="add-cart" href="{{ route('product.details',$product->id) }}"> Add To
+                                                                        Cart</a>
                                                                 </div>
-                                                                <div class="pro-details-compare-wishlist pro-details-wishlist ">
+                                                                {{-- <div class="pro-details-compare-wishlist pro-details-wishlist ">
                                                                     <a href="wishlist.html"><i class="pe-7s-like"></i></a>
-                                                                </div>
-                                                                <div class="pro-details-compare-wishlist pro-details-compare">
+                                                                </div> --}}
+                                                                {{-- <div class="pro-details-compare-wishlist pro-details-compare">
                                                                     <a href="compare.html"><i class="pe-7s-refresh-2"></i></a>
-                                                                </div>
+                                                                </div> --}}
                                                             </div>
                                                             <div class="pro-details-sku-info pro-details-same-style  d-flex">
                                                                 <span>SKU: </span>
@@ -324,6 +333,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -396,6 +406,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-sm-12 col-xs-12 mb-lm-30px mb-md-30px mb-sm-30px">
                         <!-- Swiper -->
+
                         <div class="swiper-container ">
                             <div class="swiper-wrapper ssll">
                                 @foreach (App\Models\ProductThumbnail::where('product_id',$category_product->id)->get() as $item)
@@ -420,6 +431,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="200">
+
                         <div class="product-details-content quickview-content">
                             <h2>{{ $category_product->product_name }}</h2>
                             <div class="pricing-meta">
@@ -449,10 +461,17 @@
                                 <div class="cart-plus-minus">
                                     <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
                                 </div>
+                                @auth('customerlogin')
                                 <div class="pro-details-cart">
-                                    <button class="add-cart" href="#"> Add To
+                                    <button class="add-cart" type="submit"> Add To
                                         Cart</button>
                                 </div>
+                                @else
+                                <div class="pro-details-cart">
+                                    <a class="add-cart" href="{{ url('/customer/register/view') }}"> Add ToT
+                                        Cart</a>
+                                </div>
+                                @endauth
                                 <div class="pro-details-compare-wishlist pro-details-wishlist ">
                                     <a href="wishlist.html"><i class="pe-7s-like"></i></a>
                                 </div>
@@ -501,6 +520,7 @@
                                 </ul>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -654,6 +674,7 @@
                                     <div class="new-product-item swiper-slide">
                                         <!-- Single Prodect -->
                                         <div class="product">
+
                                             <div class="thumb">
                                                 <a href="single-product.html" class="image">
                                                     <img src="{{ asset('uploads/products/preview') }}/{{ $latest_product->product_image }}" alt="Product" />

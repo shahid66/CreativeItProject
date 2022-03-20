@@ -119,5 +119,6 @@ Route::post('/order/insert',[CheckOutController::class, 'orderInsert']);
 Route::get('/order/admin/view',[CheckOutController::class, 'orderAdminView'])->name('order.admin.view');
 //WishList
 Route::get('/wishInsert/{product_id}',[WishListController::class, 'wishInsert'])->name('wishInsert');
+Route::get('/wishInsert/delete/{product_id}',[WishListController::class, 'wishDelete'])->name('wishInsert.delete');
 
 

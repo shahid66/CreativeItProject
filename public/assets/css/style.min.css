@@ -10,6 +10,27 @@ body,html {
     background: linear-gradient(155deg,#fd3d6b 0,#fd7863 98%,#f3dfe0 100%);
 
 }
+.wis_select2 {
+    font-size: 30px !important;
+    height: 40px;
+    width: 40px;
+    background: linear-gradient(155deg,#fd3d6b 0,#fd7863 98%,#f3dfe0 100%);
+    text-align: center;
+    border-radius: 50%;
+    color: #fff !important;
+}
+.product .thumb .actions .action::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(155deg,#fd3d6b 0,#fd7863 98%,#f3dfe0 100%);
+    z-index: -1;
+    transition: opacity .3s linear;
+    opacity: 0;
+}
 body {
     font-family: "Nunito Sans",sans-serif;
     font-size: 16px;

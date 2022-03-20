@@ -194,12 +194,12 @@
                 <ul class="minicart-product-list">
                     @foreach ( App\Models\WishList::where('user_id',Auth::guard('customerlogin')->id())->get() as $item)
                     <li>
-                        <a href="single-product.html" class="image"><img src="assets/images/product-image/1.jpg"
+                        <a href="{{ route('wishInsert',$item->id) }}" class="image"><img src="{{ asset('uploads/products/preview')}}/{{ $item->rel_to_product->product_image }}"
                                 alt="Cart product Image"></a>
                         <div class="content">
-                            <a href="single-product.html" class="title">Women's Elizabeth Coat</a>
-                            <span class="quantity-price">1 x <span class="amount">$21.86</span></span>
-                            <a href="#" class="remove">×</a>
+                            <a href="single-product.html" class="title">{{ $item->rel_to_product->product_name }}</a>
+                            {{-- <span class="quantity-price">1 x <span class="amount">$21.86</span></span> --}}
+                            <a href="{{ route('wishInsert.delete',$item->product_id) }}" class="remove">×</a>
                         </div>
                     </li>
                     @endforeach
