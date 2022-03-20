@@ -15,6 +15,14 @@ class CartController extends Controller
 {
     public function cartInsert(Request $req)
     {
+        // $req->validate([
+        //     'color_id'=>['required'],
+        //     'size_id'=>['required'],
+
+        // ]);
+
+        print_r($req->all());
+        die();
 
         $color_id=$req->color_id;
         $size_id=$req->size_id;

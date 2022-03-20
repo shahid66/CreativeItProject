@@ -155,13 +155,19 @@
                             <!-- Single Wedge End -->
                             <!-- Single Wedge Start -->
                             <a href="#offcanvas-wishlist" class="header-action-btn offcanvas-toggle">
+                                @if (App\Models\WishList::where('user_id',Auth::guard('customerlogin')->id())->count()>0)
+                                <span class="header-action-num">{{  App\Models\WishList::where('user_id',Auth::guard('customerlogin')->id())->count() }}</span>
+
+                                @endif
                                 <i class="pe-7s-like"></i>
                             </a>
                             <!-- Single Wedge End -->
                             <a href="#offcanvas-cart"
                                 class="header-action-btn header-action-btn-cart offcanvas-toggle pr-0">
                                 <i class="pe-7s-shopbag"></i>
+                                @if (App\Models\Cart::where('user_id',Auth::guard('customerlogin')->id())->count()>0)
                                 <span class="header-action-num">{{  App\Models\Cart::where('user_id',Auth::guard('customerlogin')->id())->count() }}</span>
+                                @endif
                                 <!-- <span class="cart-amount">€30.00</span> -->
                             </a>
                             <a href="#offcanvas-mobile-menu"
@@ -186,6 +192,7 @@
             </div>
             <div class="body customScroll">
                 <ul class="minicart-product-list">
+                    @foreach ( App\Models\WishList::where('user_id',Auth::guard('customerlogin')->id())->get() as $item)
                     <li>
                         <a href="single-product.html" class="image"><img src="assets/images/product-image/1.jpg"
                                 alt="Cart product Image"></a>
@@ -195,7 +202,7 @@
                             <a href="#" class="remove">×</a>
                         </div>
                     </li>
-
+                    @endforeach
                 </ul>
             </div>
             <div class="foot">

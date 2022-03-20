@@ -1,6 +1,8 @@
 @extends('layouts.FrontEndMaster')
 
 @section('contend')
+
+
 <!-- breadcrumb-area start -->
 <div class="breadcrumb-area">
     <div class="container">
@@ -53,8 +55,10 @@
                 </div>
             </div>
             <div class="col-lg-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="200">
+
                 <form action="{{ url('/cart/insert') }}" method="POST">
                     @csrf
+
                     <div class="product-details-content quickview-content">
                         <h2>{{ $product_details->product_name }}</h2>
                         <div class="pricing-meta">
@@ -82,6 +86,7 @@
 
                         <input type="hidden" name="product_id" id="product_id" value="{{ $product_details->id }}">
                         <input type="hidden" name="color_id" id="color_id" value="{{ 1 }}">
+
                         @else
                         <div class="pro-details-color-info d-flex align-items-center">
 
@@ -94,6 +99,7 @@
                                     <li><a class="color_id" name="{{ $color->color_id }}"  style="background:{{ App\Models\color::find($color->color_id)->color_code }} "></a></li>
                                     @endforeach
                                     <input type="hidden" name="color_id" id="color_id" value="{{ $color->color_id }}">
+
                                     <input type="hidden" name="product_id" id="product_id" value="{{ $product_details->id }}">
 
 
@@ -103,7 +109,7 @@
                         @endif
                         <!-- Sidebar single item -->
                         @if (App\Models\Inventory::where('product_id',$product_details->id)->where('size_id',1)->exists())
-                        <input type="text" name="size_id" id="size_id" value="{{ 1 }}">
+                        <input type="hidden" name="size_id" id="size_id" value="{{ 1 }}">
                         @else
                         <div class="pro-details-size-info d-flex align-items-center">
                             <span>Size</span>
@@ -116,6 +122,7 @@
                         </div>
 
                         <input type="hidden" name="size_id" id="size_id" value="">
+
 
                         <p style="color: red; font-weight:700"> <span id="qu_av"></span></p>
                         @endif
@@ -137,7 +144,13 @@
                             </div>
                             @endauth
                             <div class="pro-details-compare-wishlist pro-details-wishlist ">
-                                <a href="wishlist.html"><i class="pe-7s-like"></i></a>
+                                @if (App\Models\WishList::where('user_id',Auth::guard('customerlogin')->id())->where('product_id',$product_details->id)->exists())
+                                <a class="wis_select" href="{{ route('wishInsert',$product_details->id) }}"><i class="pe-7s-like "></i></a>
+                                @else
+                                <a  href="{{ route('wishInsert',$product_details->id) }}"><i class="pe-7s-like "></i></a>
+                                @endif
+
+
                             </div>
                             <div class="pro-details-compare-wishlist pro-details-compare">
                                 <a href="compare.html"><i class="pe-7s-refresh-2"></i></a>
@@ -365,7 +378,7 @@
                                 <span class="new">New</span>
                             </span>
                             <div class="actions">
-                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
+                                <a href="#" class="action wishlist" title="Wishlist"><i
                                         class="pe-7s-like"></i></a>
                                 <a href="#" class="action quickview" data-link-action="quickview"
                                     title="Quick view" data-bs-toggle="modal"
