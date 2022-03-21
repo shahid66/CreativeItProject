@@ -9,6 +9,7 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerLoginController;
 use App\Http\Controllers\CustomerRegisterController;
+use App\Http\Controllers\FilterProductController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfielController;
@@ -120,5 +121,9 @@ Route::get('/order/admin/view',[CheckOutController::class, 'orderAdminView'])->n
 //WishList
 Route::get('/wishInsert/{product_id}',[WishListController::class, 'wishInsert'])->name('wishInsert');
 Route::get('/wishInsert/delete/{product_id}',[WishListController::class, 'wishDelete'])->name('wishInsert.delete');
+
+//Filter Part
+
+Route::get('/filterProduct',[FilterProductController::class, 'index'])->name('filter.index');
 
 

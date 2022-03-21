@@ -14,7 +14,7 @@
                                 <div class="hero-slide-content hero-slide-content-2 slider-animated-1">
                                     <span class="category">Sale 45% Off</span>
                                     <h2 class="title-1">Exclusive New<br> Offer 2021</h2>
-                                    <a href="shop-left-sidebar.html" class="btn btn-lg btn-primary btn-hover-dark"> Shop
+                                    <a href="{{ route('filter.index') }}" class="btn btn-lg btn-primary btn-hover-dark"> Shop
                                         Now <i class="fa fa-shopping-basket ml-15px" aria-hidden="true"></i></a>
                                 </div>
                             </div>
@@ -558,7 +558,7 @@
                     <div class="item-disc">
                         <h4 class="title">Best Collection <br>
                             For Women</h4>
-                        <a href="shop-left-sidebar.html" class="shop-link btn btn-primary ">Shop Now <i
+                        <a href="{{ route('filter.index') }}" class="shop-link btn btn-primary ">Shop Now <i
                                 class="fa fa-shopping-basket ml-5px" aria-hidden="true"></i></a>
                     </div>
                 </div>

@@ -21,8 +21,8 @@ class CartController extends Controller
 
         // ]);
 
-        print_r($req->all());
-        die();
+        // print_r($req->all());
+        // die();
 
         $color_id=$req->color_id;
         $size_id=$req->size_id;
